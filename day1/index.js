@@ -1,6 +1,7 @@
 const { loadFile } = require('../utils');
 
 const calculateFuelCost = (mass) => Math.max(Math.floor(mass / 3) - 2, 0);
+
 const calculateFuelCostIncludingFuel = (mass) => {
   const fuelRequired = calculateFuelCost(mass);
   return fuelRequired + (

@@ -18,8 +18,6 @@ function init() {
   }
 
   require(`./day${day}`).execute();
-
 }
 
 init();
-
