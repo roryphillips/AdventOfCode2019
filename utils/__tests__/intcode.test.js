@@ -66,8 +66,13 @@ describe('intcode', () => {
     const conditions = [
       {
         input: [
+          /*
+            This is basic intcode program to multiply the values in memory locations 5 and 20
+            The numbers in these locations are prime, and different to the target addresses
+            This should provide adequate confidence the program is operating as expected
+           */
           [
-            2, 0, 0, 0,
+            2, 0, 0, 7,
             99, 23, 0, 0,
             0, 0, 0, 0,
             0, 0, 0, 0,
@@ -75,7 +80,7 @@ describe('intcode', () => {
             29, 0, 0, 0
           ],
           667,
-          0,
+          7,
           0,
           30
         ],
