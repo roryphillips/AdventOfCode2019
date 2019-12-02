@@ -4,10 +4,11 @@ const fs = require('fs');
 const loadFile = (path) => fs.readFileSync(path).toString().split("\n").map(str => str.trim());
 
 // Takes a table of conditions and tests each of the expectations
-const tableTest = (conditions, func) => {
+const tableTest = (conditions, func, expectationFunc = 'toBe') => {
   conditions.forEach((condition) => {
     it(`should have an output of ${condition.expected} with an input of ${condition.input}`, () => {
-      expect(func(condition.input)).toBe(condition.expected);
+      const input = func(condition.input);
+      expect(input)[expectationFunc](condition.expected);
     })
   })
 };
