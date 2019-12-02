@@ -1,4 +1,4 @@
-const { tableTest } = require('../test');
+const { tableTest } = require('../unit-test');
 const { calculateFuelCost, calculateFuelCostIncludingFuel } = require('../fuel-cost');
 
 describe('calculateFuelCost', () => {

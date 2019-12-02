@@ -1,4 +1,4 @@
-const { tableTest } = require('../test');
+const { tableTest } = require('../unit-test');
 const { evaluateIntCode } = require('../intcode');
 
 describe('evaluateIntCode', () => {
