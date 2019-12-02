@@ -1,19 +1,29 @@
-const operations = {
-  1: (a, b) => a + b,
-  2: (a, b) => a * b,
+// Constant Values
+const InstructionSize = 4;
+const OperationCode = {
+  Add: 1,
+  Multiply: 2,
+  Halt: 99
+};
+const Offsets = {
+  A: 1,
+  B: 2,
+  Store: 3
 };
 
-const offsetA = 1;
-const offsetB = 2;
-const offsetStore = 3;
-const instructionSize = 4;
+// Utils
+const operations = {
+  [OperationCode.Add]: (a, b) => a + b,
+  [OperationCode.Multiply]: (a, b) => a * b,
+};
 
 const getAddresses = (input) => ({
-  a: input[offsetA],
-  b: input[offsetB],
-  store: input[offsetStore]
+  a: input[Offsets.A],
+  b: input[Offsets.B],
+  store: input[Offsets.Store]
 });
 
+// Main intcode program runner
 const evaluateIntCode = (input) => {
   const memory = [...input];
 
@@ -22,7 +32,7 @@ const evaluateIntCode = (input) => {
 
   do {
     currentCode = memory[instructionPointer];
-    const instruction = memory.slice(instructionPointer, instructionPointer + instructionSize);
+    const instruction = memory.slice(instructionPointer, instructionPointer + InstructionSize);
     const addresses = getAddresses(instruction);
     const operation = operations[currentCode];
 
@@ -31,10 +41,12 @@ const evaluateIntCode = (input) => {
       const paramB = memory[addresses.b];
 
       memory[addresses.store] = operation(paramA, paramB);
+    } else if (currentCode !== OperationCode.Halt) {
+      console.warn(`Unknown operation code could not be parsed: ${currentCode}`)
     }
 
-    instructionPointer += instructionSize;
-  } while (currentCode < 99);
+    instructionPointer += InstructionSize;
+  } while (currentCode !== OperationCode.Halt);
 
   return memory;
 };
