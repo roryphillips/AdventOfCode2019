@@ -8,7 +8,7 @@ const execute = () => {
   console.log(`First calculation: ${memory[0]}`);
 
   const target = 19690720;
-  const { noun, verb } = bruteForceInputs(program, target);
+  const { noun, verb } = bruteForceInputs({program, target});
   const inputPhrase = 100 * noun + verb;
   console.log(`Second calculation: ${inputPhrase}`);
 };

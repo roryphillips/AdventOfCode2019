@@ -51,16 +51,16 @@ const evaluateIntCode = (input) => {
   return memory;
 };
 
-const bruteForceInputs = (program, target, resultIdx = 0, min = 0, max = 99) => {
-  const minInput = Math.min(min, program.length);
-  const maxInput = Math.max(program.length, max, minInput);
+const bruteForceInputs = ({program, target, resultLocation = 0, searchMin = 0, searchMax = 99}) => {
+  const minInput = Math.min(searchMin, program.length);
+  const maxInput = Math.min(program.length, searchMax);
 
   for (let noun = minInput; noun < maxInput; noun++) {
     for (let verb = minInput; verb < maxInput; verb++) {
       const programAttempt = [...program];
       programAttempt[1] = noun;
       programAttempt[2] = verb;
-      const result = evaluateIntCode(programAttempt)[resultIdx];
+      const result = evaluateIntCode(programAttempt)[resultLocation];
       if (result === target) {
         return {
           noun,
