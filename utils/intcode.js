@@ -51,7 +51,7 @@ const evaluateIntCode = (input) => {
   return memory;
 };
 
-const bruteForceInputs = (program, target, min = 0, max = 99) => {
+const bruteForceInputs = (program, target, resultIdx = 0, min = 0, max = 99) => {
   const minInput = Math.min(min, program.length);
   const maxInput = Math.max(program.length, max, minInput);
 
@@ -60,7 +60,7 @@ const bruteForceInputs = (program, target, min = 0, max = 99) => {
       const programAttempt = [...program];
       programAttempt[1] = noun;
       programAttempt[2] = verb;
-      const result = evaluateIntCode(programAttempt)[0];
+      const result = evaluateIntCode(programAttempt)[resultIdx];
       if (result === target) {
         return {
           noun,

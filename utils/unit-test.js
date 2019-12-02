@@ -2,7 +2,7 @@
 const tableTest = (conditions, func, expectationFunc = 'toBe') => {
   conditions.forEach((condition) => {
     it(`should have an output of ${condition.expected} with an input of ${condition.input}`, () => {
-      const input = func(condition.input);
+      const input = func(...condition.input);
       expect(input)[expectationFunc](condition.expected);
     })
   })
