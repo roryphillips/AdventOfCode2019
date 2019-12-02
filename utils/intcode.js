@@ -42,7 +42,7 @@ const evaluateIntCode = (input) => {
 
       memory[addresses.store] = operation(paramA, paramB);
     } else if (currentCode !== OperationCode.Halt) {
-      console.warn(`Unknown operation code could not be parsed: ${currentCode}`)
+      throw new Error(`Unknown operation code reached: ${currentCode}`)
     }
 
     instructionPointer += InstructionSize;
@@ -51,6 +51,29 @@ const evaluateIntCode = (input) => {
   return memory;
 };
 
+const bruteForceInputs = (program, target, min = 0, max = 99) => {
+  const minInput = Math.min(min, program.length);
+  const maxInput = Math.max(program.length, max, minInput);
+
+  for (let noun = minInput; noun < maxInput; noun++) {
+    for (let verb = minInput; verb < maxInput; verb++) {
+      const programAttempt = [...program];
+      programAttempt[1] = noun;
+      programAttempt[2] = verb;
+      const result = evaluateIntCode(programAttempt)[0];
+      if (result === target) {
+        return {
+          noun,
+          verb
+        };
+      }
+    }
+  }
+
+  throw new Error('No bruteforce solution was found within the parameters specified');
+};
+
 module.exports = {
   evaluateIntCode,
+  bruteForceInputs,
 };
