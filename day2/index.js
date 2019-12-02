@@ -8,6 +8,7 @@ const operations = {
 const offsetA = 1;
 const offsetB = 2;
 const offsetStore = 3;
+const instructionSize = 4;
 
 const getAddresses = (input) => ({
   a: input[offsetA],
@@ -18,11 +19,13 @@ const getAddresses = (input) => ({
 const evaluateIntCode = (input) => {
   const memory = [...input];
 
-  let cursor = 0;
+  let instructionPointer = 0;
   let currentCode = 0;
+
   do {
-    currentCode = memory[cursor];
-    const addresses = getAddresses(memory.slice(cursor, cursor + 4));
+    currentCode = memory[instructionPointer];
+    const instruction = memory.slice(instructionPointer, instructionPointer + instructionSize);
+    const addresses = getAddresses(instruction);
     const operation = operations[currentCode];
 
     if (operation) {
@@ -32,16 +35,34 @@ const evaluateIntCode = (input) => {
       memory[addresses.store] = operation(paramA, paramB);
     }
 
-    cursor += 4;
+    instructionPointer += instructionSize;
   } while (currentCode < 99);
 
   return memory;
 };
 
 const execute = () => {
-  const input = loadFile(_dirname + './input.txt').map((s) => Number.parseInt(s, 10));
+  const input = loadFile(__dirname + '/input.txt', ',')
+    .map((s) => Number.parseInt(s, 10));
 
-  evaluateIntCode(input);
+  const memory = evaluateIntCode(input);
+  console.log(`First calculation: ${memory[0]}`);
+
+  const target = 19690720;
+  for (let noun = 0; noun < Math.min(input.length, 99); noun++) {
+    for (let verb = 0; verb < Math.min(input.length, 99); verb++) {
+      const tempMemory = [...input];
+
+      tempMemory[1] = noun;
+      tempMemory[2] = verb;
+
+      const result = evaluateIntCode(tempMemory)[0];
+      if (result === target) {
+        console.log(`Second calculation: ${100 * noun + verb}`);
+        return;
+      }
+    }
+  }
 };
 
 module.exports = {

@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 // Loads a file and turns it into an array of strings
-const loadFile = (path) => fs.readFileSync(path).toString().split("\n").map(str => str.trim());
+const loadFile = (path, separator = "\n") => fs.readFileSync(path).toString().split(separator).map(str => str.trim());
 
 // Takes a table of conditions and tests each of the expectations
 const tableTest = (conditions, func, expectationFunc = 'toBe') => {
