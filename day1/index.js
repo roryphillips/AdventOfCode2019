@@ -1,15 +1,8 @@
-const { loadFile } = require('../utils');
-
-const calculateFuelCost = (mass) => Math.max(Math.floor(mass / 3) - 2, 0);
-
-const calculateFuelCostIncludingFuel = (mass) => {
-  const fuelRequired = calculateFuelCost(mass);
-  return fuelRequired + (
-    fuelRequired > 0
-      ? calculateFuelCostIncludingFuel(fuelRequired)
-      : 0
-  );
-};
+const {
+  loadFile,
+  calculateFuelCost,
+  calculateFuelCostIncludingFuel
+} = require('../utils');
 
 const execute = () => {
   const input = loadFile( __dirname + '/input.txt').map(str => parseInt(str, 10));

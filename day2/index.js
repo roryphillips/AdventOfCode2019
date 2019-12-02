@@ -1,5 +1,4 @@
-const { evaluateIntCode } = require('../intcode');
-const { loadFile } = require('../utils');
+const { loadFile, evaluateIntCode } = require('../utils');
 
 const execute = () => {
   const input = loadFile(__dirname + '/input.txt', ',')

@@ -1,5 +1,5 @@
-const { tableTest } = require('../utils');
-const { calculateFuelCost, calculateFuelCostIncludingFuel } = require('./index');
+const { tableTest } = require('../test');
+const { calculateFuelCost, calculateFuelCostIncludingFuel } = require('../fuel-cost');
 
 describe('calculateFuelCost', () => {
   const conditions = [

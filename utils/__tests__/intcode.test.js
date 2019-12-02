@@ -1,5 +1,5 @@
-const { tableTest } = require('./utils');
-const { evaluateIntCode } = require('./intcode');
+const { tableTest } = require('../test');
+const { evaluateIntCode } = require('../intcode');
 
 describe('evaluateIntCode', () => {
   const conditions = [

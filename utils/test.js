@@ -1,8 +1,3 @@
-const fs = require('fs');
-
-// Loads a file and turns it into an array of strings
-const loadFile = (path, separator = "\n") => fs.readFileSync(path).toString().split(separator).map(str => str.trim());
-
 // Takes a table of conditions and tests each of the expectations
 const tableTest = (conditions, func, expectationFunc = 'toBe') => {
   conditions.forEach((condition) => {
@@ -14,6 +9,5 @@ const tableTest = (conditions, func, expectationFunc = 'toBe') => {
 };
 
 module.exports = {
-  loadFile,
-  tableTest
+  tableTest,
 };
